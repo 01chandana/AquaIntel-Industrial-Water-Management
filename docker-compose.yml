@@ -172,7 +172,7 @@ services:
   kafka:
     image: confluentinc/cp-kafka:7.5.0
     environment:
-      CLUSTER_ID: aquaintel-kraft-cluster-01
+      CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
       KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:29093

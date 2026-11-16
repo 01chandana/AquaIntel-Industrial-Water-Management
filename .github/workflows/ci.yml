@@ -131,7 +131,9 @@ jobs:
         env: { E2E_BASE_URL: "http://localhost" }
         run: npm ci && npx playwright install --with-deps chromium && npx playwright test
       - if: failure()
-        run: docker compose logs --tail=200 api
+        run: |
+          docker compose logs --tail=200 migrate
+          docker compose logs --tail=200 api
 
   build-images:
     runs-on: ubuntu-latest

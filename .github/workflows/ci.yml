@@ -121,7 +121,11 @@ jobs:
           sed -i "s/^JWT_SECRET_KEY=.*/JWT_SECRET_KEY=e2e-secret-key-0123456789abcdef0123/" .env
           # journeys sign in several accounts from one IP within a minute; the production limit is 5/min
           echo "AQUAINTEL_RATE_LIMIT_LOGIN_PER_MINUTE=60" >> .env
-          docker compose -f docker-compose.yml --profile demo up -d --build
+          docker compose -f docker-compose.yml --profile demo up -d --build || {
+            docker compose -f docker-compose.yml logs --no-color --tail=200 migrate
+            docker compose -f docker-compose.yml logs --no-color --tail=100 postgres
+            exit 1
+          }
           docker compose -f docker-compose.yml wait seed          # one-shot: seeds history and trains models
           timeout 300 bash -c 'until curl -fsS http://localhost/health/ready; do sleep 5; done'
       - uses: actions/setup-node@v4

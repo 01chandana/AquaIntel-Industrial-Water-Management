@@ -26,7 +26,7 @@ os.environ.update({
     "AQUAINTEL_TASK_MODE": "inline",
     "AQUAINTEL_RATE_LIMIT_ENABLED": "true",
     "AQUAINTEL_LOCAL_STORAGE_DIR": "/tmp/aquaintel-test-storage",
-    "AQUAINTEL_SECRET_KEY": "test-secret-key-0123456789-abcdefghijklmnop",
+    "AQUAINTEL_SECRET_KEY": "x" * 64,
 })
 
 from httpx import ASGITransport, AsyncClient  # noqa: E402
